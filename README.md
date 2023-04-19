@@ -1,6 +1,6 @@
 # Apinator-Databricks
 
-`apinator` bindings for the [Databricks API](https://docs.databricks.com/api-explorer/).
+[`apinator` bindings](https://pypi.org/project/apinator/) for the [Databricks API](https://docs.databricks.com/api-explorer/).
 
 ## Example
 

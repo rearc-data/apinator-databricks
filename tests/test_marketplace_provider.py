@@ -17,7 +17,7 @@ from apinator_databricks.marketplace_provider import (
 @pytest.fixture
 def databricks_context() -> DatabricksContext:
     return DatabricksContext(
-        access_token=SecretStr("TOKEN"),
+        access_token="TOKEN",
         account="account",
     )
 
