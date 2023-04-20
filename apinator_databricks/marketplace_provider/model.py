@@ -58,16 +58,16 @@ class EmbeddedNotebookFileParent(StrictBaseModel):
     parent_id: uuid.UUID
     file_parent_type: str
 
-
 class EmbeddedNotebookFileInfo(StrictBaseModel):
     id: uuid.UUID
-    display_name: Optional[str] = None
+    display_name: Optional[str]
     marketplace_file_type: str
     file_parent: EmbeddedNotebookFileParent
     mime_type: str
     download_link: str
     created_at: datetime
     updated_at: datetime
+    status: Optional[str] # Keeping this as str as enum values are not documented
 
 
 class ListingDetail(StrictBaseModel):
