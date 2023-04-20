@@ -19,6 +19,18 @@ class DatabricksUnityCatalogApi(DatabricksApi):
             EndpointAction.update(model.Share),
             EndpointAction.partial_update(model.Share),
             EndpointAction.destroy(),
+            EndpointAction(
+                action_name="get_permissions",
+                method="GET",
+                url="/shares/{id}/permissions",
+                response_model=model.SharePermissions,
+            ),
+            EndpointAction(
+                action_name="update_permissions",
+                method="PATCH",
+                url="/shares/{id}/permissions",
+                body_model=model.SharePermissionChanges,
+            ),
         ],
     )
 
