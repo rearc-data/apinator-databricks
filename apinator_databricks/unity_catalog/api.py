@@ -22,14 +22,14 @@ class DatabricksUnityCatalogApi(DatabricksApi):
             EndpointAction(
                 action_name="get_permissions",
                 method="GET",
-                url="/shares/{id}/permissions",
+                url="/{id}/permissions",
                 response_model=model.SharePermissions,
                 arg_names=["id"],
             ),
             EndpointAction(
                 action_name="update_permissions",
                 method="PATCH",
-                url="/shares/{id}/permissions",
+                url="/{id}/permissions",
                 body_model=model.SharePermissionChanges,
                 arg_names=["id"],
             ),
