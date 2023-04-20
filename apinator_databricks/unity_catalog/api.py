@@ -79,3 +79,29 @@ class DatabricksUnityCatalogApi(DatabricksApi):
             EndpointAction.head(),
         ],
     )
+
+    recipients = EndpointGroup(
+        "/recipients",
+        actions=[
+            EndpointAction.list(model.RecipientList),
+            EndpointAction.retrieve(model.Recipient),
+            EndpointAction.create(model.Recipient),
+            EndpointAction.update(model.Recipient),
+            EndpointAction.partial_update(model.Recipient),
+            EndpointAction.destroy(),
+            EndpointAction(
+                action_name="rotate_token",
+                method="POST",
+                url="/{id}/rotate-token",
+                response_model=model.Recipient,
+                arg_names=["id"],
+            ),
+            EndpointAction(
+                action_name="get_share_permissions",
+                method="GET",
+                url="/{id}/share-permissions",
+                response_model=model.RecipientPermissionList,
+                arg_names=["id"],
+            ),
+        ],
+    )

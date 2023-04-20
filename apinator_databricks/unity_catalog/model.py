@@ -6,10 +6,10 @@ from typing import Optional, List
 from apinator.common import StrictBaseModel
 from pydantic import Json, BaseModel
 
-from .._common.model import DatabricksBase
+from .._common.model import DatabricksBase, SecurableDatabricksBase
 
 
-class Catalog(DatabricksBase):
+class Catalog(SecurableDatabricksBase):
     name: str
     owner: str
     comment: str
@@ -23,7 +23,7 @@ class CatalogList(StrictBaseModel):
     catalogs: List[Catalog] = []
 
 
-class Schema(DatabricksBase):
+class Schema(SecurableDatabricksBase):
     name: str
     catalog_name: str
     owner: str
@@ -49,7 +49,7 @@ class Column(StrictBaseModel):
     type_text: str
 
 
-class Table(DatabricksBase):
+class Table(SecurableDatabricksBase):
     name: str
     catalog_name: str
     schema_name: str
@@ -83,7 +83,7 @@ class SharedObject(StrictBaseModel):
     status: str
 
 
-class SharePartial(DatabricksBase):
+class SharePartial(SecurableDatabricksBase):
     name: str
     owner: str
     full_name: str
@@ -147,6 +147,48 @@ class SharePermissionChange(StrictBaseModel):
     remove: List[Privilege]
     principal: str
 
-
 class SharePermissionChanges(StrictBaseModel):
     changes: List[SharePermissionChange]
+
+class RecipientPrivilegeAssignments(StrictBaseModel):
+    principal: Optional[str]
+    privileges: List[Privilege]
+
+class RecipientPermissionOut(StrictBaseModel):
+    privilege_assignments: List[RecipientPrivilegeAssignments] = []
+    share_name: str
+
+class RecipientPermissionList(StrictBaseModel):
+    permissions_out: List[RecipientPermissionOut]
+
+class RecipientAuthenticationType(str, enum.Enum):
+    TOKEN = "TOKEN"
+    DATABRICKS = "DATABRICKS"
+
+class RecipientIPAccessList(StrictBaseModel):
+    allowed_ip_addresses: List[str] = []
+
+class RecipientToken(DatabricksBase):
+    expiration_time: int
+    id: str
+    activation_url: Optional[str]
+
+class Recipient(SecurableDatabricksBase):
+    name: str
+    full_name: str
+    activated: Optional[bool]
+    authentication_type: RecipientAuthenticationType
+    data_recipient_global_metastore_id: Optional[str]
+    ip_access_list: Optional[RecipientIPAccessList]
+    cloud: Optional[str]
+    comment: Optional[str]
+    sharing_code: Optional[str]
+    properties_kvpairs: dict = {}
+    region: Optional[str]
+    tokens: Optional[List[RecipientToken]]
+    owner: str
+    activation_url: Optional[str]
+    metastore_id: Optional[str]
+
+class RecipientList(StrictBaseModel):
+    recipients: List[Recipient] = []

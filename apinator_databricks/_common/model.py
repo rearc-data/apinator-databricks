@@ -8,5 +8,7 @@ class DatabricksBase(StrictBaseModel):
     created_by: str
     updated_at: datetime
     updated_by: str
+
+class SecurableDatabricksBase(DatabricksBase):
     securable_type: str
     securable_kind: str
