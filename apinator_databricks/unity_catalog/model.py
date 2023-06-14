@@ -84,6 +84,7 @@ class SharedObject(StrictBaseModel):
 
 
 class SharePartial(SecurableDatabricksBase):
+    share_id: uuid.UUID
     name: str
     owner: str
     full_name: str
