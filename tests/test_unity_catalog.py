@@ -3,6 +3,7 @@ from datetime import datetime
 
 import pytest
 import responses
+import uuid
 from pydantic import SecretStr
 from responses import matchers
 
@@ -36,6 +37,7 @@ def test_api_basically_works(uc_api):
         updated_by="test-user",
         securable_kind="",
         securable_type="",
+        share_id=uuid.uuid1(),
     )
     responses.get(
         "https://account.cloud.databricks.com/api/2.1/unity-catalog/shares/test-share/?include_shared_data=true",
