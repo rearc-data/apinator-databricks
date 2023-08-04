@@ -84,7 +84,7 @@ class Listing(StrictBaseModel):
     id: Optional[uuid.UUID] = None
     summary: ListingSummary
     detail: ListingDetail
-    deployment_name: str
+    # deployment_name: str
 
 
 class ListingList(BaseModel):
