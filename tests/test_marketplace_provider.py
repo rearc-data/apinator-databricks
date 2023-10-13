@@ -42,7 +42,7 @@ def test_api_basically_works(mp_api):
             detail=dict(
                 description="Just for testing",
             ),
-            deployment_name="depl",
+            # deployment_name="depl",
         )
     )
     responses.get(
