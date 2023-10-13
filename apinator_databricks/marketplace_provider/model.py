@@ -78,6 +78,7 @@ class ListingDetail(StrictBaseModel):
     support_link: str = ""
     privacy_policy_link: str = ""
     embedded_notebook_file_infos: List[EmbeddedNotebookFileInfo] = []
+    license: str = ""
 
 
 class Listing(StrictBaseModel):
