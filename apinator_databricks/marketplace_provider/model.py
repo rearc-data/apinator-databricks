@@ -1,10 +1,10 @@
 import enum
 import uuid
 from datetime import datetime
-from typing import Optional, List
+from typing import List, Optional
 
 from apinator.common import StrictBaseModel
-from pydantic import Field, BaseModel, validator
+from pydantic import BaseModel, Field
 
 
 class ShareType(str, enum.Enum):
@@ -58,6 +58,7 @@ class EmbeddedNotebookFileParent(StrictBaseModel):
     parent_id: uuid.UUID
     file_parent_type: str
 
+
 class EmbeddedNotebookFileInfo(StrictBaseModel):
     id: uuid.UUID
     display_name: Optional[str]
@@ -67,7 +68,13 @@ class EmbeddedNotebookFileInfo(StrictBaseModel):
     download_link: str
     created_at: datetime
     updated_at: datetime
-    status: Optional[str] # Keeping this as str as enum values are not documented
+    status: Optional[str]  # Keeping this as str as enum values are not documented
+
+
+class AssetType(str, enum.Enum):
+    GIT_REPO = "ASSET_TYPE_GIT_REPO"
+    DATA_TABLE = "ASSET_TYPE_DATA_TABLE"
+    MODEL = "ASSET_TYPE_MODEL"
 
 
 class ListingDetail(StrictBaseModel):
@@ -79,6 +86,7 @@ class ListingDetail(StrictBaseModel):
     privacy_policy_link: str = ""
     embedded_notebook_file_infos: List[EmbeddedNotebookFileInfo] = []
     license: str = ""
+    assets: list[AssetType] = []
 
 
 class Listing(StrictBaseModel):

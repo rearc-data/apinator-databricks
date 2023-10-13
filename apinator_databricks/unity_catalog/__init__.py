@@ -1,5 +1,5 @@
-from .api import DatabricksUnityCatalogApi
 from . import model as uc_model
+from .api import DatabricksUnityCatalogApi
 
 __all__ = (
     "DatabricksUnityCatalogApi",

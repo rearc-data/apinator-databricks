@@ -1,4 +1,4 @@
-from apinator import EndpointGroup, EndpointAction
+from apinator import EndpointAction, EndpointGroup
 
 from .._common.api import DatabricksApi, DatabricksSubApi
 from . import model

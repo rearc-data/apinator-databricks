@@ -1,9 +1,9 @@
 import json
+import uuid
 from datetime import datetime
 
 import pytest
 import responses
-import uuid
 from pydantic import SecretStr
 from responses import matchers
 

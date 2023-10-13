@@ -1,5 +1,5 @@
-from .api import DatabricksMarketplaceProviderApi
 from . import model as mp_model
+from .api import DatabricksMarketplaceProviderApi
 
 __all__ = (
     "DatabricksMarketplaceProviderApi",

@@ -1,7 +1,7 @@
-from apinator import EndpointGroup, EndpointAction
+from apinator import EndpointAction, EndpointGroup
 
-from . import model
 from .._common.api import DatabricksApi, DatabricksSubApi
+from . import model
 
 
 class DatabricksMarketplaceProviderApi(DatabricksApi):

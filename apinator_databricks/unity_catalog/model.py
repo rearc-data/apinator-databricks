@@ -1,10 +1,10 @@
 import enum
 import uuid
 from datetime import datetime
-from typing import Optional, List
+from typing import List, Optional
 
 from apinator.common import StrictBaseModel
-from pydantic import Json, BaseModel
+from pydantic import Json
 
 from .._common.model import DatabricksBase, SecurableDatabricksBase
 
@@ -148,31 +148,39 @@ class SharePermissionChange(StrictBaseModel):
     remove: List[Privilege]
     principal: str
 
+
 class SharePermissionChanges(StrictBaseModel):
     changes: List[SharePermissionChange]
+
 
 class RecipientPrivilegeAssignments(StrictBaseModel):
     principal: Optional[str]
     privileges: List[Privilege]
 
+
 class RecipientPermissionOut(StrictBaseModel):
     privilege_assignments: List[RecipientPrivilegeAssignments] = []
     share_name: str
 
+
 class RecipientPermissionList(StrictBaseModel):
     permissions_out: List[RecipientPermissionOut]
+
 
 class RecipientAuthenticationType(str, enum.Enum):
     TOKEN = "TOKEN"
     DATABRICKS = "DATABRICKS"
 
+
 class RecipientIPAccessList(StrictBaseModel):
     allowed_ip_addresses: List[str] = []
+
 
 class RecipientToken(DatabricksBase):
     expiration_time: int
     id: str
     activation_url: Optional[str]
+
 
 class Recipient(SecurableDatabricksBase):
     name: str
@@ -190,6 +198,7 @@ class Recipient(SecurableDatabricksBase):
     owner: str
     activation_url: Optional[str]
     metastore_id: Optional[str]
+
 
 class RecipientList(StrictBaseModel):
     recipients: List[Recipient] = []

@@ -1,10 +1,8 @@
 import json
 import uuid
-from datetime import datetime
 
 import pytest
 import responses
-from pydantic import SecretStr
 from responses import matchers
 
 from apinator_databricks.common import DatabricksContext
