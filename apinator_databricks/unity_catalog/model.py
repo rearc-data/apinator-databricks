@@ -183,6 +183,7 @@ class RecipientToken(DatabricksBase):
 
 
 class Recipient(SecurableDatabricksBase):
+    id: str
     name: str
     full_name: str
     activated: Optional[bool]
