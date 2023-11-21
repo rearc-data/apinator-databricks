@@ -27,25 +27,22 @@ def mp_api(databricks_context) -> DatabricksMarketplaceProviderApi:
 
 @responses.activate
 def test_api_basically_works(mp_api):
-    sample_obj = mp_model.Listing.parse_obj(
-        dict(
-            id=str(uuid.uuid4()),
-            summary=dict(
-                name="Test Product",
-                subtitle="An example product",
-                status=mp_model.ListingStatus.PUBLISHED,
-                provider_id=str(uuid.uuid4()),
-                listing_type=mp_model.ListingType.STANDARD,
-            ),
-            detail=dict(
-                description="Just for testing",
-            ),
-            # deployment_name="depl",
-        )
+    sample_obj = mp_model.Listing(
+        id=uuid.uuid4(),
+        summary=mp_model.ListingSummary(
+            name="Test Product",
+            subtitle="An example product",
+            status=mp_model.ListingStatus.PUBLISHED,
+            provider_id=uuid.uuid4(),
+            listing_type=mp_model.ListingType.STANDARD,
+        ),
+        detail=mp_model.ListingDetail(
+            description="Just for testing",
+        ),
     )
     responses.get(
         f"https://account.cloud.databricks.com/api/2.0/marketplace-provider/listings/{sample_obj.id}/",
-        json=json.loads(sample_obj.json()),
+        json=json.loads(sample_obj.model_dump_json()),
         match=[matchers.header_matcher({"Authorization": "Bearer TOKEN"})],
     )
 

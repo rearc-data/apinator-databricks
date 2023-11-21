@@ -41,7 +41,7 @@ def test_api_basically_works(uc_api):
     )
     responses.get(
         "https://account.cloud.databricks.com/api/2.1/unity-catalog/shares/test-share/?include_shared_data=true",
-        json=json.loads(sample_obj.json()),
+        json=json.loads(sample_obj.model_dump_json()),
         match=[matchers.header_matcher({"Authorization": "Bearer TOKEN"})],
     )
 

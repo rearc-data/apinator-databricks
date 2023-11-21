@@ -1,12 +1,13 @@
 from apinator import JsonApiBase
-from pydantic import BaseModel, constr, validate_arguments
+from pydantic import BaseModel, StringConstraints, validate_arguments
+from typing_extensions import Annotated
 
 from apinator_databricks.common import DatabricksContext
 
 
 class DatabricksSubApi(BaseModel):
-    version: constr(regex=r"\d+\.\d+")
-    prefix: constr(regex=r"^[a-z0-9_-]+$")
+    version: Annotated[str, StringConstraints(pattern=r"\d+\.\d+")]
+    prefix: Annotated[str, StringConstraints(pattern=r"^[a-z0-9_-]+$")]
 
 
 class DatabricksApi(JsonApiBase):

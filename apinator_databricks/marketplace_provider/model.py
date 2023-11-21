@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from apinator.common import StrictBaseModel
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ShareType(str, enum.Enum):
@@ -37,7 +37,7 @@ class ListingSummary(StrictBaseModel):
     name: str
     subtitle: str
     status: ListingStatus
-    provider_info: dict = None  # deprecated
+    provider_info: Optional[dict] = None  # deprecated
     share: Optional[ListingShare] = None
     setting: Optional[ListingSetting] = None
     created_at: Optional[datetime] = None
@@ -49,9 +49,7 @@ class ListingSummary(StrictBaseModel):
     categories: List[str] = []
     listing_type: ListingType = Field(alias="listingType")
     provider_id: uuid.UUID
-
-    class Config:
-        allow_population_by_field_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class EmbeddedNotebookFileParent(StrictBaseModel):
@@ -87,6 +85,8 @@ class ListingDetail(StrictBaseModel):
     embedded_notebook_file_infos: List[EmbeddedNotebookFileInfo] = []
     license: str = ""
     assets: list[AssetType] = []
+    update_frequency: str | None = ""
+    data_source: str | None = ""
 
 
 class Listing(StrictBaseModel):

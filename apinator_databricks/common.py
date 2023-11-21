@@ -1,8 +1,9 @@
 from typing import Union
 
-from pydantic import BaseModel, SecretStr, constr
+from pydantic import BaseModel, SecretStr, StringConstraints
+from typing_extensions import Annotated
 
 
 class DatabricksContext(BaseModel):
     access_token: Union[SecretStr, str]
-    account: constr(regex=r"^[a-z0-9_-]+$")
+    account: Annotated[str, StringConstraints(pattern=r"^[a-z0-9_-]+$")]
